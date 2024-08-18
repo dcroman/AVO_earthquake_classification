@@ -1,0 +1,42 @@
+%
+%   Last updated Apr 16, 2022 2:20pm by Diana Roman
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fix later
+
+IMPORTANT NOTE: I HAVE HARDCODED IT TO USE ONLY STATIONS THAT BEGIN WITH G (GSSP, GSCK, etc). THIS IS TO AVOID BAD PICKS ON ADK, ETKA, ADAG...
+
+I have to throw out channels with lower sampling rates (20 Hz), and downsample 100 Hz channels to 50 Hz, to get the stack to work. 11/6/19
+
+Does not catch errors in a file (use ME variable to build this)
+
+Requires MLtrue table to run
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%   Weird error problem. If you rerun the events with errors, sometimes they work
+%
+%   Error 1, 2, and 4 result when the miniseed file does not contain picked waves
+%   Error 1: station GSTD not processed: Insufficient number of outputs from right hand side of equal sign to satisfy assignment.
+%   Error 1: event not processed: Unrecognized function or variable 'picked_waves'.
+%   Error 2: station ADK not processed: Insufficient number of outputs from right hand side of equal sign to satisfy assignment.
+%   Error 2: event not processed: Unable to convert '0/0/0/0/00.00' to datetime using the format 'yyyy/DDD/HH/mm/ss.SSS'.
+%   Error 4: station ADK not processed: Insufficient number of outputs from right hand side of equal sign to satisfy assignment.
+%   Error 4: event not processed: Unrecognized function or variable 'start_times'.
+
+%   Error 3: event not processed: Index exceeds the number of array elements (3328).
+%   These are AVO mseed files that are not centered on the pick
+%  
+%   Error 6: event not processed: Unable to convert '2017/219/20/60/00.40' to datetime using the format 'yyyy/DDD/HH/mm/ss.SS'
+%   Related error -  Nonfinite endpoints or increment for colon operator in index.
+%   Crappy Solution: Manually edit pickfile to correct times (it doesn't like '60' in the minutes field')
+
+%   Error 7: stacklength problem
+%   Results from a station being picked on both EHZ/BHZ channels
+%   Crappy Solution: Manually edit pickfile to remove duplicate EHZ picks
+
+%   Error 8: station 09-Jun-201711:48:21 not processed: Insufficient number of outputs from right hand side of equal sign to satisfy assignment.
+%   Fewer than three Z picks on GS stations
+
+
